@@ -8,7 +8,7 @@ namespace Domain.Entities;
 /// <summary>
 /// Страна
 /// </summary>
-public class Country : BaseEntity
+public class Country : BaseEntity<Country>
 {
     /// <summary>
     /// Конструктор сущности Country
@@ -22,7 +22,7 @@ public class Country : BaseEntity
         Code = code;
 
         // Валидация при создании объекта
-        Validate();
+        ValidateEntity(new CountryValidator());
     }
 
     /// <summary>
@@ -34,20 +34,5 @@ public class Country : BaseEntity
     /// Код Страны
     /// </summary>
     public string Code { get; set; }
-
-    /// <summary>
-    /// Метод для проверки корректности данных с использованием CountryValidator
-    /// </summary>
-    /// <exception cref="ValidationException">Выбрасывается при ошибках валидации</exception>
-    public void Validate()
-    {
-        var validator = new CountryValidator();
-        ValidationResult result = validator.Validate(this);
-
-        if (!result.IsValid)
-        {
-            var errors = string.Join(" | ", result.Errors.Select(x => x.ErrorMessage));
-            throw new ValidationException(errors);
-        }
-    }
+    
 }

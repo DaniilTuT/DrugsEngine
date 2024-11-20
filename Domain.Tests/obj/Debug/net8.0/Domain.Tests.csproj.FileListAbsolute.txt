@@ -102,3 +102,5 @@ C:\Users\Даниил\source\repos\Applications\DrugsEngine\Domain.Tests\obj\Deb
 C:\Users\Даниил\source\repos\Applications\DrugsEngine\Domain.Tests\obj\Debug\net8.0\Domain.Tests.pdb
 C:\Users\Даниил\source\repos\Applications\DrugsEngine\Domain.Tests\obj\Debug\net8.0\Domain.Tests.genruntimeconfig.cache
 C:\Users\Даниил\source\repos\Applications\DrugsEngine\Domain.Tests\obj\Debug\net8.0\ref\Domain.Tests.dll
+C:\Users\Даниил\source\repos\Applications\DrugsEngine\Domain.Tests\obj\Debug\net8.0\Domain.Tests.sourcelink.json
+C:\Users\Даниил\source\repos\Applications\DrugsEngine\Domain.Tests\bin\Debug\net8.0\MediatR.Contracts.dll

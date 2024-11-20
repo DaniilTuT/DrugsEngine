@@ -1,4 +1,6 @@
-﻿namespace Domain.ValueObjects;
+﻿using Domain.Validators;
+
+namespace Domain.ValueObjects;
 
 /// <summary>
 /// Полный адресс
@@ -18,6 +20,8 @@ public class Address : BaseValueObject
         Street = street ;
         House = house;
         PostalCode = postalCode;
+        
+        ValidateValueObject(new AddressValidator());
     }
 
     /// <summary>
@@ -32,6 +36,8 @@ public class Address : BaseValueObject
     /// Номер дома
     /// </summary>
     public string House { get; private set; }
-    
+    /// <summary>
+    /// Почтовый индекс
+    /// </summary>
     public int PostalCode { get; private set; }
 }

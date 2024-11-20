@@ -8,7 +8,7 @@ namespace Domain.Entities;
 /// <summary>
 /// Магазин лекарств
 /// </summary>
-public class DrugStore : BaseEntity
+public class DrugStore : BaseEntity<DrugStore>
 {
     /// <summary>
     /// Конструктор сущности DrugStore
@@ -25,7 +25,7 @@ public class DrugStore : BaseEntity
         PhoneNumber = phoneNumber;
         DrugNetwork = drugNetwork;
 
-        Validate();
+        ValidateEntity(new DrugStoreValidator());
     }
 
     /// <summary>
@@ -52,20 +52,5 @@ public class DrugStore : BaseEntity
     /// Навигационное свойство для связи DrugStore и DrugItem
     /// </summary>
     public List<DrugItem> DrugItems { get; set; } = new List<DrugItem>();
-    
-    /// <summary>
-    /// Метод для проверки корректности данных с использованием DrugStoreValidator
-    /// </summary>
-    /// <exception cref="ValidationException">Выбрасывается при ошибках валидации</exception>
-    public void Validate()
-    {
-        var validator = new DrugStoreValidator();
-        ValidationResult result = validator.Validate(this);
-        
-        if (!result.IsValid)
-        {
-            var errors = string.Join(" | ", result.Errors.Select(x => x.ErrorMessage));
-            throw new ValidationException(errors);
-        }
-    }
+
 }

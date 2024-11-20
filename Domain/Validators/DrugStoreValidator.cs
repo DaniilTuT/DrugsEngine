@@ -24,14 +24,5 @@ public class DrugStoreValidator : AbstractValidator<DrugStore>
             .NotNull().WithMessage(ValidationMessage.NotNull)
             .NotEmpty().WithMessage(ValidationMessage.NotEmpty);
 
-        RuleFor(ds => ds.Address.Street)
-            .Length(3, 100).WithMessage(ValidationMessage.WrongLength);
-
-        RuleFor(ds => ds.Address.City)
-            .Length(2, 50).WithMessage(ValidationMessage.WrongLength);
-
-        RuleFor(ds => ds.Address.PostalCode.ToString())
-            .Length(5, 6).WithMessage(ValidationMessage.WrongLength);
-
     }
 }

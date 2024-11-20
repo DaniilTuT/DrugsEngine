@@ -1,4 +1,5 @@
-﻿using Domain.Validators;
+﻿using Domain.DomainEvents;
+using Domain.Validators;
 using FluentValidation;
 using FluentValidation.Results;
 
@@ -7,7 +8,7 @@ namespace Domain.Entities;
 /// <summary>
 /// Промежуточная сущность для связи Drug и DrugStore
 /// </summary>
-public class DrugItem : BaseEntity
+public class DrugItem : BaseEntity<DrugItem>
 {
     /// <summary>
     /// Конструктор сущности DrugItem
@@ -19,7 +20,7 @@ public class DrugItem : BaseEntity
     /// <param name="drug">Объект типа Drug, связанный с DrugItem</param>
     /// <param name="drugStore">Объект типа DrugStore, связанный с DrugItem</param>
     /// <exception cref="ValidationException">Выбрасывается, если валидация не пройдена</exception>
-    public DrugItem(Guid drugId, Guid drugStoreId, int count, decimal cost, Drug drug, DrugStore drugStore)
+    public DrugItem(Guid drugId, Guid drugStoreId, double count, decimal cost, Drug drug, DrugStore drugStore)
     {
         DrugId = drugId;
         DrugStoreId = drugStoreId;
@@ -28,7 +29,7 @@ public class DrugItem : BaseEntity
         Drug = drug;
         DrugStore = drugStore;
         
-        Validate();
+        ValidateEntity(new DrugItemValidator());
     }
 
     /// <summary>
@@ -44,7 +45,7 @@ public class DrugItem : BaseEntity
     /// <summary>
     /// Количество лекарства в магазине
     /// </summary>
-    public int Count { get; set; }
+    public double Count { get; set; }
 
     /// <summary>
     /// Стоимость лекарства в магазине 
@@ -60,20 +61,12 @@ public class DrugItem : BaseEntity
     /// Навигационное свойство для связи DrugStore и DrugItem
     /// </summary>
     public DrugStore DrugStore { get; set; }
-    
-    /// <summary>
-    /// Метод для проверки корректности данных с использованием DrugItemValidator
-    /// </summary>
-    /// <exception cref="ValidationException">Выбрасывается при ошибках валидации</exception>
-    public void Validate()
+ 
+
+    public void UpdateDrugCount(double count)
     {
-        var validator = new DrugItemValidator();
-        ValidationResult result = validator.Validate(this);
-        
-        if (!result.IsValid)
-        {
-            var errors = string.Join(" | ", result.Errors.Select(x => x.ErrorMessage));
-            throw new ValidationException(errors);
-        }
+        Count = count;
+        ValidateEntity(new DrugItemValidator());
+        AddDomainEvent(new DrugItemUpdatedEvent());
     }
 }

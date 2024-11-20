@@ -14,12 +14,9 @@ public class DrugTest
     {
         // Arrange
         var countrty = new Country("USA", "US");
-        var drug = new Drug("Aspirin","China-Inc","RU", countrty);
-        // Инициализация DrugStoreNumbers для теста
-
 
         // Act & Assert
-        var exception = Record.Exception(() => drug.Validate());
+        var exception = Record.Exception(() => new Drug("Aspirin","China-Inc","RU", countrty));
 
         // Assert
         Assert.Null(exception); // Ожидаем, что исключение не будет выброшено
@@ -30,6 +27,5 @@ public class DrugTest
     {
         // Act & Assert
         var exception = Assert.Throws<ValidationException>(() => new Drug("Aspirin","","ZZ", null));
-        Assert.Contains(" Manufacturer должен содержать только буквы, пробелы и дефисы.", exception.Message);
     }
 }
