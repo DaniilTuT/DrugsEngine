@@ -5,7 +5,7 @@ namespace Domain.Entities;
 /// <summary>
 /// Профиль пользователя
 /// /// </summary>
-public class Profile : BaseEntity<Profile>
+public class UserProfile : BaseEntity<UserProfile>
 {
     /// <summary>
     /// Конструктор для инициализации профиля пользователя
@@ -13,7 +13,7 @@ public class Profile : BaseEntity<Profile>
     /// <param name="externalId">Внешний уникальный идентификатор пользователя</param>
     /// <param name="favoriteDrugs">Список избранных лекарств пользователя</param>
     /// <param name="email">Электронная почта пользователя</param>
-    public Profile(string externalId, List<FavoriteDrug> favoriteDrugs, Email? email)
+    public UserProfile(string externalId, List<FavoriteDrug> favoriteDrugs, Email? email)
     {
         ExternalId = externalId;
         FavoriteDrugs = favoriteDrugs;

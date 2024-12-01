@@ -7,7 +7,7 @@ namespace Domain.Validators
     /// Валидатор для сущности Profile.
     /// Проверяет, что внешнего идентификатор (ExternalId) не пустой и имеет допустимую длину.
     /// </summary>
-    public sealed class ProfileValidator : AbstractValidator<Profile>
+    public sealed class ProfileValidator : AbstractValidator<UserProfile>
     {
         /// <summary>
         /// Конструктор валидатора для Profile.
