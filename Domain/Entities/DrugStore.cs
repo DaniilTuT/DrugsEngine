@@ -27,6 +27,7 @@ public class DrugStore : BaseEntity<DrugStore>
 
         ValidateEntity(new DrugStoreValidator());
     }
+    public DrugStore(){}
 
     /// <summary>
     /// Адрес магазина
