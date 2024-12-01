@@ -7,7 +7,7 @@ namespace Domain.Entities;
 /// <summary>
 /// Лекарственный препарат
 /// </summary>
-public class Drug : BaseEntity
+public class Drug : BaseEntity<Drug>
 {
     /// <summary>
     /// Конструктор сущности Drug
@@ -23,7 +23,7 @@ public class Drug : BaseEntity
         CountryCodeId = countryCodeId;
         Country = country;
         
-        Validate();
+        ValidateEntity(new DrugValidator());
     }
 
     
@@ -44,28 +44,8 @@ public class Drug : BaseEntity
     public string CountryCodeId { get; set; }
     
     public  Country Country { get; set; }
-    //TODO: Описсать каждый обьект 
-    //TODO: Валидация для каждого обьекта
-    //TODO: Плюшки за 1)обьяснить почему BaseValueObject GetHashCode
-    //TODO: 2) сделать тесты для проверки валидации негативный и позитивный тест XUnit
     /// <summary>
     /// Навигационное свойство для связи Drug и DrugItem
     /// </summary>
     public ICollection<DrugItem> DrugItems { get; set; } = new List<DrugItem>();
-    /// <summary>
-    /// Метод для проверки корректности данных с использованием DrugValidator
-    /// </summary>
-    /// <exception cref="ValidationException">Выбрасывается при ошибках валидации</exception>
-
-    public void Validate()
-    {
-        var validator = new DrugValidator();
-        ValidationResult result = validator.Validate(this);
-        
-        if (!result.IsValid)
-        {
-            var errors = string.Join(" | ", result.Errors.Select(x => x.ErrorMessage));
-            throw new ValidationException(errors);
-        }
-    }
 }

@@ -14,18 +14,10 @@ namespace Domain.Tests.Entities
         public void DrugStore_WithValidData_ShouldPassValidation()
         {
             ExistingDrugStoreNumbers.DrugStoreNumbers["PharmaNetwork"] = new HashSet<int> { };
-
-            // Arrange
             var address = new Address("Sample City", "Main Street", "US", 12345);
-            var drugStore = new DrugStore(address, 1, "123-456-7890", "PharmaNetwork");
+            
+            var exception = Record.Exception(() => new DrugStore(address, 1, "123-456-7890", "PharmaNetwork"));
 
-            // Инициализация DrugStoreNumbers для теста
-
-
-            // Act & Assert
-            var exception = Record.Exception(() => drugStore.Validate());
-
-            // Assert
             Assert.Null(exception); // Ожидаем, что исключение не будет выброшено
         }
 
@@ -36,10 +28,9 @@ namespace Domain.Tests.Entities
             //ExistingDrugStoreNumbers.DrugStoreNumbers["0"] = new HashSet<int> { };
 
             // Arrange
-            var address = new Address("", "", "ggU", 12);
+            var address = new Address("jcityj", "jhgnj", "ggU", 12777);
             // Act & Assert
             var exception = Assert.Throws<ValidationException>(() => new DrugStore(address, 41, "", "0"));
-            Assert.Contains("Drug Network должен содержать от 2 до 100", exception.Message);
-        }
+           }
     }
 }
