@@ -25,6 +25,8 @@ public class Drug : BaseEntity<Drug>
         
         ValidateEntity(new DrugValidator());
     }
+    
+    public Drug(){}
 
     
 

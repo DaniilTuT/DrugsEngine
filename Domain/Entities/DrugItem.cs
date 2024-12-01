@@ -31,6 +31,7 @@ public class DrugItem : BaseEntity<DrugItem>
         
         ValidateEntity(new DrugItemValidator());
     }
+    public DrugItem(){}
 
     /// <summary>
     /// Внешний ключ для Drug
